@@ -1,0 +1,21 @@
+# Diplom
+
+<!--Установка-->
+## Установка (Docker)
+
+1. Установка Docker desctop
+
+https://www.docker.com/products/docker-desktop/
+
+2. Переход в директорию diplom
+
+```cd diplom```
+
+3. Сборка проекта (контейнера docker)
+
+```docker-compose build``
+
+4. Активация контейнера
+
+```docker-compose up```
+

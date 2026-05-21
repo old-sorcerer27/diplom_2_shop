@@ -1,0 +1,16 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Фоновый круг -->
+  <circle cx="32" cy="32" r="30" fill="#dc3545" fill-opacity="0.1"/>
+  <circle cx="32" cy="32" r="28" stroke="#dc3545" stroke-width="2"/>
+  
+  <!-- Корона -->
+  <path d="M16 24L22 16L28 22L32 18L36 22L42 16L48 24" stroke="#dc3545" stroke-width="2.5" fill="none" stroke-linejoin="round"/>
+  <path d="M18 24L46 24V44C46 48 42 52 32 52C22 52 18 48 18 44V24Z" stroke="#dc3545" stroke-width="2.5" fill="none" stroke-linejoin="round"/>
+  
+  <!-- Бриллиант в центре короны -->
+  <path d="M28 20L32 16L36 20L32 26L28 20Z" fill="#dc3545"/>
+  
+  <!-- Скипетр (опционально) -->
+  <line x1="50" y1="14" x2="54" y2="18" stroke="#dc3545" stroke-width="2.5" stroke-linecap="round"/>
+  <circle cx="54" cy="18" r="3" fill="#dc3545"/>
+</svg>

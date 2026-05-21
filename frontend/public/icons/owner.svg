@@ -1,0 +1,14 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Фоновый круг -->
+  <circle cx="32" cy="32" r="30" fill="#667eea" fill-opacity="0.1"/>
+  <circle cx="32" cy="32" r="28" stroke="#667eea" stroke-width="2"/>
+  
+  <!-- Голова пользователя -->
+  <circle cx="32" cy="22" r="8" fill="#667eea"/>
+  
+  <!-- Тело -->
+  <path d="M16 46C16 38 22 34 32 34C42 34 48 38 48 46" stroke="#667eea" stroke-width="3" fill="none" stroke-linecap="round"/>
+  
+  <!-- Галочка -->
+  <path d="M44 18L48 22L56 14" stroke="#28a745" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
