@@ -90,12 +90,24 @@ onMounted(() => {
                 <div class="profile-header">
                     <div class="row align-items-center">
                         <div class="col-md-2 text-center">
-                            <div class="avatar">
-                                <i class="fas fa-user"></i>
+                                <div class="avatar">
+                             
+                                <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <circle cx="40" cy="40" r="38" fill="url(#avatarGradient)" stroke="#fff" stroke-width="2"/>
+                                    <circle cx="40" cy="30" r="10" fill="#fff" fill-opacity="0.8"/>
+                                    <path d="M20 60C20 52 24 44 40 44C56 44 60 52 60 60" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round"/>
+                                    <defs>
+                                        <linearGradient id="avatarGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                            <stop offset="0%" stop-color="#667eea"/>
+                                            <stop offset="100%" stop-color="#764ba2"/>
+                                        </linearGradient>
+                                    </defs>
+                                </svg>
+                                
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <h2>{{ auth.getCurrentUser()?.name }}</h2>
+                            <h2>{{ auth.getCurrentUser()?.username }}</h2>
                             <p class="text-muted">
                                 <i class="fas fa-envelope"></i> {{ auth.getCurrentUser()?.email }}
                             </p>

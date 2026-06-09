@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+     <html>
+     <head>
+         <meta charset="UTF-8">
+         <style>
+             * { 
+                margin: 0; 
+                padding: 0; 
+                box-sizing: border-box; 
+                }
+             
+             body { 
+                font-family: 'Segoe UI', 
+                Tahoma, 
+                Geneva, 
+                Verdana, 
+                sans-serif; 
+                background: #f5f7fb; 
+                line-height: 1.6; 
+                }
+             
+             .container { 
+                max-width: 600px; 
+                margin: 0 auto; 
+                background: white; 
+                border-radius: 15px; 
+                overflow: hidden; 
+                box-shadow: 0 10px 30px rgba(0,0,0,0.1); 
+            }
+             
+             .header { 
+                background: linear-gradient(135deg, #28a745, #20c997); 
+                color: white; 
+                padding: 30px; 
+                text-align: center; 
+            }
+             
+             .header h1 { 
+                margin: 0; font-size: 28px; }
+                .content { 
+                padding: 30px; 
+            }
+             .info-box { 
+                background: #d4edda; 
+                border-left: 4px solid #28a745; 
+                padding: 15px; 
+                margin: 20px 0; 
+                border-radius: 8px; 
+            }
+             table { 
+                width: 100vw; 
+                border-collapse: collapse;
+                 margin: 20px 0; }
+             th { 
+                background: #f8f9fa; 
+                padding: 12px; 
+                text-align: left; 
+                border-bottom: 2px solid #e0e0e0; 
+            }
+             td { 
+                padding: 12px; 
+                border-bottom: 1px solid #eee; }
+             .total { 
+                text-align: right; 
+                font-size: 18px; 
+                font-weight: bold; 
+                color: #28a745; 
+                margin-top: 20px; 
+            }
+             .footer { 
+                background: #f8f9fa; 
+                padding: 20px; 
+                text-align: center; 
+                color: #999; 
+                font-size: 12px; 
+            }
+         </style>
+     </head>
+     <body>
+         <div class="container">
+             <div class="header">
+                 <h1>✅ Заказ #%d подтвержден</h1>
+                 <p>Спасибо за покупку!</p>
+             </div>
+             
+             <div class="content">
+                 <p>Здравствуйте, <strong>%s</strong>!</p>
+                 <p>Ваш заказ успешно оформлен. Мы свяжемся с вами в ближайшее время.</p>
+                 
+                 <div class="info-box">
+                     <strong>📋 Детали заказа #%d</strong><br>
+                     Дата: %s<br>
+                     Статус: <span style="color: #ffc107;">Ожидает обработки</span>
+                 </div>
+                 
+                 <h3>Состав заказа:</h3>
+                 <table>
+                     <thead>
+                         <tr><th>Товар</th><th>Кол-во</th><th>Сумма</th></tr>
+                     </thead>
+                     <tbody>
+                         %s
+                     </tbody>
+                 </table>
+                 
+                 <div class="total">
+                     Итого: %s ₽
+                 </div>
+                 
+                 <!-- <p style="margin-top: 20px;">
+                     Следить за статусом заказа вы можете в <a href="%%s/profile">личном кабинете</a>.
+                 </p> -->
+             </div>
+             
+             <div class="footer">
+                 <p>© 2024 Мой Магазин</p>
+             </div>
+         </div>
+     </body>
+</html>`,

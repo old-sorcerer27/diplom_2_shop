@@ -9,7 +9,7 @@ const REMEMBER_ME_KEY = 'remember_me';
 export interface User {
   id: number;
   email: string;
-  name: string;
+  username: string;
   role: 'client' | 'admin' | 'owner';
   isActive: boolean;
   createdAt: string;
@@ -301,7 +301,9 @@ export let auth = reactive({
         try {
           return JSON.parse(userStr) as User;
         } catch {
+              console.log("error user response")
           return null;
+      
         }
     },
 

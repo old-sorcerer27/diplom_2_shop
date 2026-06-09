@@ -11,6 +11,12 @@ require (
 )
 
 require (
+	github.com/go-mail/mail/v2 v2.3.0 // indirect
+	github.com/joho/godotenv v1.5.1 // indirect
+	gopkg.in/alexcesaro/quotedprintable.v3 v3.0.0-20150716171945-2caba252f4dc // indirect
+)
+
+require (
 	github.com/bytedance/gopkg v0.1.3 // indirect
 	github.com/bytedance/sonic v1.15.0 // indirect
 	github.com/bytedance/sonic/loader v0.5.0 // indirect

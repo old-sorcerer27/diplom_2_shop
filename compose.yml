@@ -1,0 +1,27 @@
+version: "3"
+
+services:
+
+  backend:
+
+    build: backend/
+
+    # command: go build -o main .
+    # сommand: go run main.go
+
+    ports:
+      - "8080:8080"
+
+  frontend:
+
+    build: frontend/
+
+    # command: npm start
+
+    # network_mode: host
+
+    ports:
+      - ${APP_PORT}:5173
+
+    depends_on:
+      - backend

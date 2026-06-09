@@ -3,6 +3,7 @@ import {reactive} from 'vue'
 const API_URL = 'http://localhost:8080/api/v1'
 import { cart, totalPrice } from '../utils/cart'
 import { products } from '@/utils/products'
+import { Modal } from 'bootstrap'
 
 const orderForm = reactive({
   name: '',
@@ -64,7 +65,7 @@ const  submitOrder = async () => {
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
-                    <form >
+                    <form onsubmit.prevent="submitOrder()">
                         <div class="mb-3">
                             <label>Ваше имя</label>
                             <input type="text" class="form-control" v-model="orderForm.name" required>

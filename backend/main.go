@@ -1,15 +1,27 @@
 package main
 
 import (
+	"log"
 	"store/database"
 	"store/handlers"
 	"store/middleware"
+	"store/services"
 
 	"github.com/gin-gonic/gin"
+	"github.com/joho/godotenv"
 )
 
-func main() {
+func init() {
+	// loads values from .env into the system
+	if err := godotenv.Load(); err != nil {
+		log.Print("No .env file found")
+	}
+	services.LoadConfig()
+
 	database.InitDB()
+}
+
+func main() {
 
 	r := gin.Default()
 
@@ -27,6 +39,7 @@ func main() {
 		public.POST("/auth/register", handlers.Register)
 		public.POST("/auth/login", handlers.Login)
 
+		public.GET("/checkconn", CheckConnection)
 		public.GET("/products", handlers.GetProducts)
 		public.GET("/products/search", handlers.GetProductsByName)
 		public.GET("/products/:id", handlers.GetProductByID)
@@ -51,5 +64,9 @@ func main() {
 		admin.DELETE("/products/:id", handlers.DeleteProduct)
 	}
 
-	r.Run(":8080")
+	r.Run(":" + services.AppConfig.Port)
+}
+
+func CheckConnection(c *gin.Context) {
+	c.JSON(200, gin.H{"message": "Connected to backend"})
 }

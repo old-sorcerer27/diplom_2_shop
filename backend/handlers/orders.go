@@ -6,6 +6,8 @@ import (
 	"store/database"
 	"store/database/generated"
 	"store/database/source"
+	"store/services"
+	"time"
 
 	"github.com/gin-gonic/gin"
 	"gorm.io/gorm"
@@ -20,8 +22,17 @@ type OrderRequest struct {
 	} `json:"items"`
 }
 
+var emailService *services.EmailService
+
+func InitEmailService() error {
+	var err error
+	emailService, err = services.NewEmailService()
+	return err
+}
+
 func CreateOrder(c *gin.Context) {
 	var req OrderRequest
+	var orderItems []services.OrderItem
 	log.Printf("Order data %v\n", req)
 
 	if err := c.BindJSON(&req); err != nil {
@@ -51,6 +62,13 @@ func CreateOrder(c *gin.Context) {
 				return gorm.ErrInvalidData
 			}
 			total += product.Price * float64(item.Quantity)
+
+			orderItems = append(orderItems, services.OrderItem{
+				ProductID:   product.ID,
+				ProductName: product.Name,
+				Quantity:    item.Quantity,
+				Price:       product.Price,
+			})
 		}
 		orderID, err := generated.OrderQuery[source.Order](db).CreateOrder(c.Request.Context(), req.CustomerName, req.CustomerEmail, total)
 		if err != nil {
@@ -67,6 +85,37 @@ func CreateOrder(c *gin.Context) {
 		}
 		c.JSON(http.StatusOK, gin.H{"order_id": orderID, "total": total})
 		log.Printf("Order created successfully: ID=%d, Total=%.2f\n", orderID, total)
+
+		orderData := &services.OrderData{
+			ID:            uint(orderID),
+			CustomerName:  req.CustomerName,
+			CustomerEmail: req.CustomerEmail,
+			Total:         total,
+			Status:        "pending",
+			CreatedAt:     time.Now(),
+		}
+
+		for _, item := range orderItems {
+			orderData.Items = append(orderData.Items, services.OrderItem{
+				ProductID:   item.ProductID,
+				ProductName: item.ProductName,
+				Quantity:    item.Quantity,
+				Price:       item.Price,
+			})
+		}
+
+		// Отправляем email уведомления (асинхронно)
+		if emailService != nil {
+			go emailService.NotifyOwner(orderData)
+			go emailService.NotifyCustomer(orderData)
+		}
+
+		c.JSON(http.StatusCreated, gin.H{
+			"order_id": orderID,
+			"total":    total,
+			"status":   "pending",
+		})
+
 		return nil
 	})
 	if Error != nil {

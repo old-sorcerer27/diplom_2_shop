@@ -24,7 +24,7 @@ import { cart } from '../../utils/cart'
                 <div v-else>
                     <div class="dropdown d-inline-block">
                         <button class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown">
-                            <i class="fas fa-user-circle"></i> {{ auth.getCurrentUser()?.name || 'Профиль' }}
+                            <i class="fas fa-user-circle"></i> {{ auth.getCurrentUser()?.username || 'Профиль' }}
                         </button>
                         <ul class="dropdown-menu dropdown-menu-end">
                             <li><a class="dropdown-item" href="profile">
@@ -43,7 +43,7 @@ import { cart } from '../../utils/cart'
                         </ul>
                     </div>
                 </div>
-                 <button class="btn btn-outline-light me-2" @click="SetHomeState(HomePageStates.CART)">
+                 <button class="btn btn-outline-light me-2" @click="SetHomeState(HomePageStates.CART) ">
                         Корзина <span class="badge bg-light text-dark ms-1">{{ cart.cart.length }}</span>
                 </button>
             </div>

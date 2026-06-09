@@ -3,6 +3,7 @@
 import { CheckHomeState, HomePageStates, SetHomeState } from '@/utils/home';
 import { auth } from '../../utils/auth'
 import { cart, totalPrice } from '../../utils/cart'
+import {Modal} from 'bootstrap'
 
 </script>
 
@@ -32,7 +33,7 @@ import { cart, totalPrice } from '../../utils/cart'
             <div class="alert alert-success">
                 <strong>Общая сумма: {{ totalPrice }} ₽</strong>
             </div>
-            <button class="btn btn-success" @click="auth.checkouth()" data-bs-toggle="modal" data-bs-target="#checkoutModal">
+            <button class="btn btn-success" @click="cart.checkoutCart()" data-bs-toggle="modal" data-bs-target="#checkoutModal">
                 Оформить заказ
             </button>
             <button class="btn btn-secondary ms-2" @click="SetHomeState(HomePageStates.PRODUCTS)">

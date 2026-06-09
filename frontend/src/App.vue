@@ -14,9 +14,11 @@ import { CheckHomeState, HomePageStates } from './utils/home'
 
 onMounted(() => {
     cart.loadCart();
+    // auth.logout()
 })
 
 console.log('App component loaded. Auth state:', auth.isAuthenticated(), 'Cart items:', cart.cart.length);
+console.log(auth.getCurrentUser())
 </script>
 
 <template>
@@ -48,6 +50,7 @@ console.log('App component loaded. Auth state:', auth.isAuthenticated(), 'Cart i
             </div>
         </div>
     </div>
+
   </main>
 </template>
 

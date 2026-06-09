@@ -2,6 +2,7 @@ import {reactive, computed } from 'vue'
 import { auth } from './auth';
 import { Product } from './products';
 
+
 export const totalPrice = computed(() => {
   return cart.cart.reduce((sum: number, item: { product: Product; quantity: number }) => sum + (item.product?.price || 0) * item.quantity, 0)
 })
@@ -10,6 +11,15 @@ export let cart = reactive({
     cart: <{ product: Product; quantity: number }[]>([]),
     loading: false,
     showModalOrder: false,
+
+
+    checkoutCart() {
+            if (this.cart.length === 0) {
+                alert('Корзина пуста');
+                return false;
+            }
+            return true;
+    },
 
     loadCart() {
         const savedCart = localStorage.getItem('cart');
