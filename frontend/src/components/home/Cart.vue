@@ -1,7 +1,6 @@
 <script setup lang="ts">
 
-import { CheckHomeState, HomePageStates, SetHomeState } from '@/utils/home';
-import { auth } from '../../utils/auth'
+import { HomePageStates, SetHomeState } from '@/utils/home';
 import { cart, totalPrice } from '../../utils/cart'
 import {Modal} from 'bootstrap'
 

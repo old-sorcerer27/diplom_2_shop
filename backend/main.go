@@ -64,7 +64,8 @@ func main() {
 		admin.DELETE("/products/:id", handlers.DeleteProduct)
 	}
 
-	r.Run(":" + services.AppConfig.Port)
+	// r.Run(":" + services.AppConfig.Port)
+	r.Run(":8080")
 }
 
 func CheckConnection(c *gin.Context) {
