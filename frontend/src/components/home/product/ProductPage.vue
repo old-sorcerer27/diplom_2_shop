@@ -6,6 +6,7 @@ import { products } from '@/utils/products'
 import { format } from '@/utils/utils'
 import { reviews } from '@/utils/reviews'
 import ProductReviews from './ProductReviews.vue'
+import ProductGallery from './gallery/ProductGallery.vue'
 
 
 const totalPrice = computed(() => {
@@ -46,19 +47,11 @@ const buyNow = async () => {
     <div class="container mt-4" v-if="products.product">
             <div class="row">
                 <!-- Левая колонка - Галерея -->
-                <div class="col-lg-6 mb-4">
-                    <div class="product-gallery">
-                        <div class="main-image">
-                            <img :src="products.currentImage" :alt="products.product.name">
-                        </div>
-                        <div class="thumbnail-list">
-                            <div v-for="(img, idx) in products.product.images" :key="idx"
-                                 :class="['thumbnail', { active: products.currentImage === img }]"
-                                 @click="products.currentImage = img">
-                                <img :src="img" :alt="products.product.name + ' ' + idx">
-                            </div>
-                        </div>
-                    </div>
+                   <div class="col-lg-6 mb-4">
+                  <ProductGallery
+                    :images="products.product.images"
+                    :product-name="products.product.name"
+                  />
                 </div>
 
                 <!-- Правая колонка - Информация -->
@@ -96,7 +89,7 @@ const buyNow = async () => {
                             </div>
                             <div class="meta-item">
                                 <span class="meta-label"><i class="fas fa-calendar"></i> Добавлен</span>
-                                <span>{{ format.formatDate(products.product.created_At) }}</span>
+                                <span>{{ format.formatDate(products.product.created_at) }}</span>
                             </div>
                         </div>
                         

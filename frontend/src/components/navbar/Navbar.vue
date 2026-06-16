@@ -30,12 +30,21 @@ import { cart } from '../../utils/cart'
                             <li><a class="dropdown-item" href="profile">
                                 <i class="fas fa-id-card"></i> Личный кабинет
                             </a></li>
-                            <!-- <li v-if="auth.user?.role === 'admin'"><a class="dropdown-item" href="AdminPanel.vue">
-                                <i class="fas fa-user-shield"></i> Админ-панель
-                            </a></li>
-                            <li v-if="auth.user?.role === 'owner'"><a class="dropdown-item" href="OwnerPanel.vue">
+                            <li v-if="auth.getCurrentUser()?.role === 'admin' || auth.getCurrentUser()?.role === 'owner'">
+                              <a class="dropdown-item" href="/admin">
+                                <i class="fas fa-store-alt"></i> Управление товарами
+                              </a>
+                            </li>
+                            <li v-if="auth.getCurrentUser()?.role === 'admin'">
+                              <a class="dropdown-item" href="/admin/orders">
+                                <i class="fas fa-list"></i> Заказы
+                              </a>
+                            </li>
+                            <li v-if="auth.getCurrentUser()?.role === 'owner'">
+                              <a class="dropdown-item" href="/owner">
                                 <i class="fas fa-crown"></i> Панель владельца
-                            </a></li> -->
+                              </a>
+                            </li>
                             <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item text-danger" href="#" @click.prevent="auth.logout()">
                                 <i class="fas fa-sign-out-alt"></i> Выйти

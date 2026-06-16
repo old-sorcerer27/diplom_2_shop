@@ -1,6 +1,7 @@
 package handlers
 
 import (
+	"log"
 	"net/http"
 	"store/database/source"
 	"store/services"
@@ -24,6 +25,7 @@ func NewImageHandler(db *gorm.DB) *ImageHandler {
 
 // UploadProductImage - загрузка основного изображения товара
 func (h *ImageHandler) UploadProductImage(c *gin.Context) {
+	log.Println("Received request to upload product image")
 	productID, err := strconv.ParseUint(c.Param("id"), 10, 64)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid product ID"})
@@ -87,13 +89,13 @@ func (h *ImageHandler) UploadProductImage(c *gin.Context) {
 
 // UploadProductGallery - загрузка галереи изображений
 func (h *ImageHandler) UploadProductGallery(c *gin.Context) {
+	log.Println("Received request to upload product gallery")
 	productID, err := strconv.ParseUint(c.Param("id"), 10, 64)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid product ID"})
 		return
 	}
 
-	// Получаем форму с несколькими файлами
 	form, err := c.MultipartForm()
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Failed to parse form"})
@@ -111,7 +113,6 @@ func (h *ImageHandler) UploadProductGallery(c *gin.Context) {
 		return
 	}
 
-	// Находим товар
 	var product source.Product
 	if err := h.db.First(&product, productID).Error; err != nil {
 		c.JSON(http.StatusNotFound, gin.H{"error": "Product not found"})
@@ -160,6 +161,7 @@ func (h *ImageHandler) UploadProductGallery(c *gin.Context) {
 
 // DeleteProductImage - удаление основного изображения
 func (h *ImageHandler) DeleteProductImage(c *gin.Context) {
+	log.Println("Received request to delete product image")
 	productID, err := strconv.ParseUint(c.Param("id"), 10, 64)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid product ID"})
@@ -195,6 +197,7 @@ func (h *ImageHandler) DeleteProductImage(c *gin.Context) {
 
 // DeleteGalleryImage - удаление изображения из галереи
 func (h *ImageHandler) DeleteGalleryImage(c *gin.Context) {
+	log.Println("Received request to delete gallery image")
 	productID, err := strconv.ParseUint(c.Param("id"), 10, 64)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid product ID"})
@@ -241,6 +244,7 @@ func (h *ImageHandler) DeleteGalleryImage(c *gin.Context) {
 
 // GetProductImages - получение всех изображений товара
 func (h *ImageHandler) GetProductImages(c *gin.Context) {
+	log.Println("Received request to get product images")
 	productID, err := strconv.ParseUint(c.Param("id"), 10, 64)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid product ID"})

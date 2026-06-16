@@ -3,8 +3,7 @@ import {onMounted} from 'vue'
 const API_URL = 'http://localhost:8080/api/v1'
 import { products } from '@/utils/products'
 import { cart } from '@/utils/cart'
-import ProductPage from './ProductPage.vue'
-import { CheckHomeState, HomePageStates } from '@/utils/home'
+import ProductImage from './gallery/ProductImage.vue'
 
 onMounted(() => {
     products.loadProducts();
@@ -26,6 +25,12 @@ onMounted(() => {
                         <div class="card h-100">
                             <div class="card-body">
                                 <button @click="products.loadProduct(product.ID)">
+                                     <ProductImage
+                                      :src="product.image_url || product.gallery?.[0]"
+                                      :alt="product.name"
+                                      size="medium"
+                                      :lazy="true"
+                                    />
 
                                     <h5 class="card-title">{{ product.name }}</h5>
                                     <p class="card-text">{{ product.description }}</p>
