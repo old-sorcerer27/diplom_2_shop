@@ -2,6 +2,7 @@
     import { ref } from 'vue';
     import { auth, RegisterData} from '../../utils/auth'
     import { navigateTo } from '../../utils/router';
+    import NavbarBrand from './NavbarBrand.vue';
 
     const form = ref<RegisterData>({
       name: '',
@@ -39,6 +40,7 @@
 </script>
 
 <template>
+    <navbar-brand />
     <div class="auth-container">
         <div class="auth-card">
             <div class="auth-header">

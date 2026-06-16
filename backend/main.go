@@ -16,9 +16,13 @@ func init() {
 	if err := godotenv.Load(); err != nil {
 		log.Print("No .env file found")
 	}
-	services.LoadConfig()
+	if err := services.LoadConfig(); err != nil {
+		log.Fatal("Failed to load config:", err)
+	}
 
 	database.InitDB()
+
+	services.SetupUploadDirectories()
 }
 
 func main() {
@@ -27,12 +31,17 @@ func main() {
 
 	r.Use(middleware.CORSMiddleware())
 
+	db := database.GetDB()
+	imageHandler := handlers.NewImageHandler(db)
+
 	r.Use(func(c *gin.Context) {
 		c.Header("Access-Control-Allow-Origin", "*")
 		c.Header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
 		c.Header("Access-Control-Allow-Headers", "Content-Type")
 		c.Next()
 	})
+
+	r.Static("/uploads", "./uploads")
 
 	public := r.Group("/api/v1")
 	{
@@ -45,6 +54,8 @@ func main() {
 		public.GET("/products/:id", handlers.GetProductByID)
 		public.GET("/orders", handlers.GetOrders)
 		public.POST("/orders", handlers.CreateOrder)
+
+		public.GET("/products/:id/images", imageHandler.GetProductImages)
 	}
 
 	auth := r.Group("/api/v1")

@@ -56,8 +56,8 @@ type OrderQuery interface {
 	// DELETE FROM order_items WHERE user_id = @userID
 	ClearOrder(ctx context.Context, userID int) error
 
-	// INSERT INTO orders (customer_name, customer_email, total) VALUES (@customerName, @customerEmail, @total)
-	CreateOrder(ctx context.Context, customerName string, customerEmail string, total float64) (int, error)
+	// INSERT INTO orders (customer_name, customer_email, customer_phone, comment, total) VALUES (@customerName, @customerEmail, @customerPhone, @comment, @total)
+	CreateOrder(ctx context.Context, customerName string, customerEmail string, customerPhone string, comment string, total float64) (int, error)
 
 	// INSERT INTO order_items  (order_id, product_id, quantity, created_at) VALUES (@orderID, @productID, @quantity, CURRENT_TIMESTAMP)
 	AddToOrder(ctx context.Context, orderID int, productID int, quantity int) error

@@ -1,7 +1,8 @@
 <script setup lang="ts">
     import { ref } from 'vue';
     import { auth, LoginCredentials } from '../../utils/auth'
-import { navigateTo } from '../../utils/router';
+    import { navigateTo } from '../../utils/router';
+    import NavbarBrand from './NavbarBrand.vue';
 
     const form = ref<LoginCredentials>({
       email: '',
@@ -50,6 +51,7 @@ import { navigateTo } from '../../utils/router';
 </script>
 
 <template>
+      <NavbarBrand/>
     <div class="auth-container">
         <div class="auth-card">
             <div class="auth-header">

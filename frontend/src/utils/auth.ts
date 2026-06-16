@@ -10,6 +10,7 @@ export interface User {
   id: number;
   email: string;
   username: string;
+  phone?: string;
   role: 'client' | 'admin' | 'owner';
   isActive: boolean;
   createdAt: string;
@@ -25,6 +26,7 @@ export interface RegisterData {
   name: string;
   email: string;
   password: string;
+  phone?: string;
 }
 
 export interface AuthResponse {

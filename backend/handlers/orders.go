@@ -16,6 +16,8 @@ import (
 type OrderRequest struct {
 	CustomerName  string `json:"customer_name"`
 	CustomerEmail string `json:"customer_email"`
+	CustomerPhone string `json:"customer_phone"`
+	Comment       string `json:"comment"`
 	Items         []struct {
 		ProductID int `json:"product_id"`
 		Quantity  int `json:"quantity"`
@@ -70,7 +72,13 @@ func CreateOrder(c *gin.Context) {
 				Price:       product.Price,
 			})
 		}
-		orderID, err := generated.OrderQuery[source.Order](db).CreateOrder(c.Request.Context(), req.CustomerName, req.CustomerEmail, total)
+		orderID, err := generated.OrderQuery[source.Order](db).CreateOrder(
+			c.Request.Context(),
+			req.CustomerName,
+			req.CustomerEmail,
+			req.CustomerPhone,
+			req.Comment,
+			total)
 		if err != nil {
 			c.JSON(http.StatusInternalServerError, gin.H{"error creating order": err.Error()})
 			log.Printf("Error creating order: %v\n", err)
@@ -109,12 +117,6 @@ func CreateOrder(c *gin.Context) {
 			go emailService.NotifyOwner(orderData)
 			go emailService.NotifyCustomer(orderData)
 		}
-
-		c.JSON(http.StatusCreated, gin.H{
-			"order_id": orderID,
-			"total":    total,
-			"status":   "pending",
-		})
 
 		return nil
 	})
